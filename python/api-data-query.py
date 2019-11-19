@@ -6,7 +6,7 @@ import plotly.graph_objs as go
 
 import pandas as pd
 
-API_URL = "http://iot.sensera-iot.com/rest/"
+API_URL = "https://iot.sensera-iot.com/rest/"
 
 USERNAME="username"
 PASSWORD="password"
