@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>API Example</h1>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        //when the document is ready, call the docReady function
+        $(document).ready(docReady);
+
+        var bearerToken = "";
+
+        /**
+        * Demonstrating the login API function 
+        */
+        function doLogin(credentials){
+
+            return $.ajax({
+                dataType: "text",
+                contentType: "application/json",
+                type: "POST",
+                url: "https://iot.aretas.ca/rest/authentication/j",
+                data: JSON.stringify(credentials),
+                success: function (data) {
+                    bearerToken = data;
+                },
+                error: function (data) {
+                    console.log(data);
+                    alert("Could not log you in, please try again");
+                }
+            });
+
+        }
+
+        function docReady() {
+            //create a basic credentials object
+            let credentials = {
+                username: "username",
+                password: "password"
+            };
+
+            doLogin(credentials).done(function(){
+                console.log("Bearer Token:" + bearerToken);
+            });
+            
+        }
+    </script>
+</body>
+
+</html>

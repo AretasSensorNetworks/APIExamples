@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>API Example</h1>
+    <h2>Latest Sensor Data</h2>
+    <pre>
+        <code id="results"></code>
+    </pre>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        //when the document is ready, call the docReady function
+        $(document).ready(docReady);
+
+        var bearerToken = "";
+
+        /**
+         * Demonstrating the login API function 
+         */
+        function doLogin(credentials) {
+
+            return $.ajax({
+                dataType: "text",
+                contentType: "application/json",
+                type: "POST",
+                url: "https://iot.aretas.ca/rest/authentication/j",
+                data: JSON.stringify(credentials),
+                success: function (data) {
+                    bearerToken = data;
+                },
+                error: function (data) {
+                    console.log(data);
+                    alert("Could not log you in, please try again");
+                }
+            });
+
+        }
+
+        function docReady() {
+            //create a basic credentials object
+            let credentials = {
+                username: "username",
+                password: "password"
+            };
+
+            doLogin(credentials).done(function () {
+
+                console.log("Bearer Token:" + bearerToken);
+
+                //query the API for some sensor statuses using the MAC / device IDs as paramaters
+                let sensorsToQuery = ["00000001", "00000002"];
+
+                $.ajax({
+                    beforeSend: function (xhr) {
+                        //use the bearerToken we received previously in the Auth header
+                        xhr.setRequestHeader('Authorization', "Bearer " + bearerToken);
+                    },
+                    dataType: "json",
+                    data: JSON.stringify(sensorsToQuery),
+                    contentType: "application/json",
+                    type: "POST",
+                    url: "https://iot.aretas.ca/rest/sensorreport/latest",
+                    success: function (data) {
+                        console.log(data);
+                        document.getElementById("results").innerHTML = JSON.stringify(data);
+                    },
+                    error: function (data) {
+                        console.log("Error calling sensor statuses");
+                        console.log(data);
+                    }
+                });
+            });
+
+        }
+    </script>
+</body>
+
+</html>
