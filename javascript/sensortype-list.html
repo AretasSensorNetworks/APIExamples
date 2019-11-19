@@ -4,8 +4,8 @@
 <body>
 
     <h1>API Example</h1>
-    <h2>Latest Sensor Data</h2>
-    <p>An example of how to query the latest sensor data for a list of MAC / Device IDs</p>
+    <h2>List Sensor Types</h2>
+    <p>An example of how to list the sensor metadata for the various types in the system</p>
     <pre>
         <code id="results"></code>
     </pre>
@@ -39,6 +39,7 @@
         }
 
         function docReady() {
+
             //create a basic credentials object
             let credentials = {
                 username: "username",
@@ -46,28 +47,22 @@
             };
 
             doLogin(credentials).done(function () {
-
-                console.log("Bearer Token:" + bearerToken);
-
-                //query the API for some sensor statuses using the MAC / device IDs as paramaters
-                let sensorsToQuery = ["00000001", "00000002"];
-
+                console.log("Requesting sensortypes");
                 $.ajax({
                     beforeSend: function (xhr) {
                         //use the bearerToken we received previously in the Auth header
                         xhr.setRequestHeader('Authorization', "Bearer " + bearerToken);
                     },
-                    dataType: "json",
-                    data: JSON.stringify(sensorsToQuery),
+                    data: JSON.stringify({enabled: true}),
                     contentType: "application/json",
-                    type: "POST",
-                    url: "https://iot.aretas.ca/rest/sensorreport/latest",
+                    type: "GET",
+                    url: "https://iot.aretas.ca/rest/sensortype/list",
                     success: function (data) {
                         console.log(data);
                         document.getElementById("results").innerHTML = JSON.stringify(data);
                     },
                     error: function (data) {
-                        console.log("Error calling sensor statuses");
+                        console.log("Error calling sensor types!");
                         console.log(data);
                     }
                 });
