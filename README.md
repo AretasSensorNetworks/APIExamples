@@ -1,6 +1,9 @@
 # Aretas API Documentation and Examples
 Various Examples for the Aretas IoT API
 
+## Companion Documentation
+The Aretas Knowledge Base will contain companion documentation (Tutorials, Introductions, etc.). You can access that here: http://www2.aretas.ca/knowledge-base/
+
 ## REST API
 Most of the Aretas IoT REST API methods are documented through the automatic WADL generator. You can find those here:
 https://aretassensornetworks.github.io/APIExamples/swadl/wadl.html
