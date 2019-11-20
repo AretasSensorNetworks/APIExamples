@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application xmlns="http://wadl.dev.java.net/2009/02">
+    <doc xmlns:jersey="http://jersey.java.net/" jersey:generatedBy="Jersey: 2.26 2017-09-05 11:50:34"/>
+    <doc xmlns:jersey="http://jersey.java.net/" jersey:hint="This is simplified WADL with user and core resources only. To get full WADL with extended resources use the query parameter detail. Link: http://iot.aretas.ca/rest/application.wadl?detail=true"/>
+    <grammars/>
+    <resources base="https://iot.aretas.ca/rest/">
+        <resource path="/locationtagupdate">
+            <resource path="/update">
+                <method id="updateTag" name="POST">
+                    <doc>Update a LocationTag in the system. </doc>
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="persist" style="query" type="xs:boolean" default="false">
+                            <doc>A query parameter that determines whether or not the submitted update will be persisted in the data store</doc>
+                        </param>
+                        <representation mediaType="application/json">
+                            <doc>A JSON representation of a LocationTag</doc>
+                        </representation>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/updatebatch">
+                <method id="updateTag" name="POST">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="persist" style="query" type="xs:boolean" default="false"/>
+                        <representation mediaType="application/json"/>
+                    </request>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sensorstatus">
+            <resource path="/list">
+                <method id="getSensorStatuses" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getassocmacs">
+                <method id="getAssocMacs" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="locationId" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/strategy">
+            <resource path="/remove">
+                <method id="remove" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/update">
+                <method id="update" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/list">
+                <method id="list" name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/save">
+                <method id="save" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/locationreporthistory">
+            <resource path="/byrange">
+                <method id="getByRange" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="tagId" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="iqrFilter" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="iqrMulti" style="query" type="xs:double" default="1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="iqrInterpolate" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="movingAverage" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="windowSize" style="query" type="xs:int" default="1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/dashboard">
+            <resource path="/stats">
+                <method id="getDashboardStats" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="locationId" style="query" type="xs:string"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/monitorstats">
+                <method id="getMonitorDashboardStats" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="sparkWindowSize" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/thermostat">
+            <resource path="/strategies">
+                <method id="getStrategies" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/greetings">
+            <method id="getProtectedGreeting" name="GET">
+                <response>
+                    <representation mediaType="application/json"/>
+                </response>
+            </method>
+            <resource path="public">
+                <method id="getPublicGreeting" name="GET">
+                    <response>
+                        <representation mediaType="text/plain"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/masteronly">
+                <method id="getMasterOnlyGreeting" name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sensorreport">
+            <resource path="/latest">
+                <method id="getSensorReports" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/getextsensordata">
+            <resource path="/AMGThermalReport">
+                <method id="getAMGThermalReport" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="500"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/audiodata">
+                <method id="getAudioByMacTypeRangeWLimit" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="114"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="500"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/bymactyperangelimit">
+                <method id="getByMacTypeRangeWLimit" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="500"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/bridge">
+            <resource path="/strategies">
+                <method id="getStrategies" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sensorlocation">
+            <resource path="/mlist">
+                <method id="mlist" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/remove">
+                <method id="remove" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/update">
+                <method id="update" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/list">
+                <method id="list" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/create">
+                <method id="save" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sensordata">
+            <resource path="/byrange/csv">
+                <method id="getByRangeCSV" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="text/csv"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrangeandtype">
+                <method id="getByRangeAndType" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrange/csvordered">
+                <method id="getByRangeCSVOrdered" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="text/csv-c"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/latest">
+                <method id="getLatestReadings" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrangemv">
+                <method id="getByRangeMV" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="window" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrange">
+                <method id="getByRange" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="downsample" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="threshold" style="query" type="xs:int" default="100"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="movingAverage" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="windowSize" style="query" type="xs:int" default="1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="requestedIndexes" style="query" type="xs:string" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="arrIEQAssumptions" style="query" type="xs:string" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="iqRange" style="query" type="xs:float" default="-1"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sitelocation">
+            <resource path="/delete">
+                <method id="remove" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/update">
+                <method id="update" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/list">
+                <method id="list" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/create">
+                <method id="save" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/authentication">
+            <resource path="/f">
+                <method id="authenticateUserForm" name="POST">
+                    <request>
+                        <representation mediaType="application/x-www-form-urlencoded">
+                            <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="username" style="query" type="xs:string"/>
+                            <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="password" style="query" type="xs:string"/>
+                        </representation>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/g">
+                <method id="authenticateUserGet" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="username" style="query" type="xs:string"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="password" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/j">
+                <method id="authenticateUser" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/authstatus">
+                <method id="testAuthStatus" name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/logout">
+                <method id="logout" name="POST">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/alertstatus">
+            <resource path="/list">
+                <method id="getAlertStatus" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sensorinfo">
+            <resource path="/getallsensorsformac">
+                <method id="getSensorTypesByMAC" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getexttypesbymac">
+                <method id="getExtSensorTypesByMac" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getsensorreadingcountbymac">
+                <method id="getSensorReadingCountByMac" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/getsensorreadingcountbymactype">
+                <method id="getSensorReadingCountByMacType" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="-1"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/locationtags">
+            <resource path="/purge">
+                <method id="purge" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/remove">
+                <method id="remove" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/update">
+                <method id="update" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/create">
+                <method id="create" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/list">
+                <method id="list" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="buildingMapId" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/metadata">
+            <resource path="/areatypes">
+                <method id="listAreaTypes" name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/spatialagents">
+            <resource path="/get">
+                <method id="getSpatialAgentStatus" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="tagIds" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/ingest">
+            <resource path="/secured/std/get">
+                <method id="insertStdDataSecured" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="a" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="t" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="m" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="st" style="query" type="xs:int" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="d" style="query" type="xs:float"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/std/get">
+                <method id="insertStdData" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="a" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="t" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="m" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="st" style="query" type="xs:int" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="d" style="query" type="xs:float"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/ext/get">
+                <method id="insertExtData" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="a" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="t" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="m" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="st" style="query" type="xs:int" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="d" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/ext/post">
+                <method id="insertExtDataPost" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/std/batch">
+                <method id="insertBatchStd" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/timezone">
+            <resource path="/query">
+                <method id="getZoneId" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="lat" style="query" type="xs:double"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="lon" style="query" type="xs:double"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/alertprocessor">
+            <resource path="/submit">
+                <method id="processMessage" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/sensortype">
+            <resource path="/list">
+                <method id="list" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="enabled" style="query" type="xs:boolean"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/client">
+            <resource path="/getclientid">
+                <method id="getClientID" name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/locationview">
+                <method id="getLocationView" name="GET">
+                    <response>
+                        <representation mediaType="*/*"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/update">
+                <method id="update" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="*/*"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/save">
+                <method id="save" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="*/*"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/file">
+            <resource path="/upload">
+                <method id="uploadFile" name="POST">
+                    <request>
+                        <representation mediaType="multipart/form-data"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/alert">
+            <resource path="/remove">
+                <method id="remove" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/update">
+                <method id="update" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/list">
+                <method id="list" name="GET">
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/save">
+                <method id="save" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/buildingmaps">
+            <resource path="/getimage">
+                <method id="getMapImageByMapId" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="bearerToken" style="query" type="xs:string"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="locationId" style="query" type="xs:string"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mapId" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="image/jpeg"/>
+                        <representation mediaType="image/png"/>
+                        <representation mediaType="image/bmp"/>
+                        <representation mediaType="image/gif"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/create">
+                <method id="createBuildingMap" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/update">
+                <method id="updateBuildingMap" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/delete">
+                <method id="deleteBuildingMap" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="query" type="xs:string" default=""/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/list">
+                <method id="listBuildingMapsByLocation" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="locationId" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/predictions">
+            <resource path="/dailybyhour">
+                <method id="getDailyByHourForecastCurve" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="regressionDepthDays" style="query" type="xs:int" default="0"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/alerthistory">
+            <resource path="/list">
+                <method id="getAlertHistory" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/extutils">
+            <resource path="/thermalimagehelper">
+                <method id="getThermalImageFromFloatArr" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="thermalData" style="query" type="xs:string" default="0"/>
+                    </request>
+                    <response>
+                        <representation mediaType="image/png"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/wavfile">
+                <method id="getWavFile" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="start" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="500"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="audio/wav"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="downsampleFFT">
+                <method id="downsampleTimeSeriesFFT" name="POST">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="downsampleMethod" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="epsilon" style="query" type="xs:int" default="50"/>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/archive">
+            <resource path="/getlastreporttime">
+                <method id="getLastRecordTimeByMac" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="-1"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrange/csv">
+                <method id="getByRangeCSV" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="text/csv"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrangeandtype">
+                <method id="getByRangeAndType" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="type" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrangemv">
+                <method id="getByRangeMV" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="window" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/byrange">
+                <method id="getByRange" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mac" style="query" type="xs:long" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="begin" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="end" style="query" type="xs:long" default="-1"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="limit" style="query" type="xs:int" default="0"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="downsample" style="query" type="xs:boolean" default="false"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="threshold" style="query" type="xs:int" default="100"/>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="offsetData" style="query" type="xs:boolean" default="false"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+        <resource path="/downalert">
+            <resource path="/update">
+                <method id="update" name="POST">
+                    <request>
+                        <representation mediaType="application/json"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+            <resource path="/list">
+                <method id="list" name="GET">
+                    <request>
+                        <param xmlns:xs="http://www.w3.org/2001/XMLSchema" name="id" style="query" type="xs:string"/>
+                    </request>
+                    <response>
+                        <representation mediaType="application/json"/>
+                    </response>
+                </method>
+            </resource>
+        </resource>
+    </resources>
+</application>
