@@ -4,6 +4,14 @@ With only a few lines of code, you can bridge almost any device and bring it onl
 
 In this example you are shown how to connect directly to the SG111A CO2 sensor with a low cost FTDI adapter and bring the data from the sensor straight into the platform. However, the principles demonstrated would work with any type of sensor or device. 
 
+## Overall Steps
+1. Create a standard (mock) device in your Aretas IoT Cloud Account (take note of the MAC address)
+2. Hookup the sensor (more below)
+3. Configure the script
+4. Run the script
+
+## Device Hookup
+
 To learn how to hookup the FTDI device and the SG111A, review the tutorial here: [https://www2.aretas.ca/knowledge-base/sg111a-co2-sensor-and-python/](https://www2.aretas.ca/knowledge-base/sg111a-co2-sensor-and-python/)
 To recap briefly: 
 1. Purchase a SparkFun FTDI adapter (or Adafruit or any of the other multitude of FTDI Adapters out there)
