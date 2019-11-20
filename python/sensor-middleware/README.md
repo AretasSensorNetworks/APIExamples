@@ -56,7 +56,7 @@ On the console, you should see basic debugging output showing the script is rece
     API Response:200
 
 If all goes well, you'll see something like this in the Aretas IoT user interface (the SG111A middleware is the top chart in this case):
-![enter image description here](http://www2.aretas.ca/wp-content/uploads/2019/11/SG111A-Python-Live-Data.png)
+![enter image description here](https://www2.aretas.ca/wp-content/uploads/2019/11/SG111A-Python-Live-Data-2.jpg)
 
 
 
