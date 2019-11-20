@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>API Example</h1>
+    <h2>Querying Sensor Data</h2>
+    <p>A basic example for querying the webservice for time series data</p>
+    <pre>
+        <code id="results"></code>
+    </pre>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        //when the document is ready, call the docReady function
+        $(document).ready(docReady);
+
+        var bearerToken = "";
+
+        /**
+         * Demonstrating the login API function 
+         */
+        function doLogin(credentials) {
+
+            return $.ajax({
+                dataType: "text",
+                contentType: "application/json",
+                type: "POST",
+                url: "https://iot.aretas.ca/rest/authentication/j",
+                data: JSON.stringify(credentials),
+                success: function (data) {
+                    bearerToken = data;
+                },
+                error: function (data) {
+                    console.log(data);
+                    alert("Could not log you in, please try again");
+                }
+            });
+
+        }
+
+        function docReady() {
+
+            //create a basic credentials object
+            let credentials = {
+                username: "username",
+                password: "password"
+            };
+
+            doLogin(credentials).done(function () {
+
+                console.log("Bearer Token:" + bearerToken);
+
+                let end = Date.now();
+                let begin = end - (8 * 60 * 60 * 1000);
+
+                //construct an object with the required query parameters
+                //change the MAC address to the device you'd like to query
+                let queryData = {
+                    mac: 1,
+                    begin: begin,
+                    end: end,
+                    limit: 1000000
+                }
+
+                $.ajax({
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Bearer " + bearerToken);
+                        xhr.setRequestHeader("X-AIR-Token", queryData.mac);
+                    },
+                    dataType: "json",
+                    type: "GET",
+                    url: "http://iot.aretas.ca/rest/sensordata/byrange",
+                    //traditional: true,
+                    data: queryData,
+                    success: function (data, status, xhr) {
+                        //extract the token from the response to match up the MAC with the query results
+                        let macToken = xhr.getResponseHeader("X-AIR-Token");
+                        document.getElementById("results").innerHTML = JSON.stringify(data);
+                    },
+                    error: function (error) {
+                        console.log("Failed to query data");
+                        console.log(error);
+                    },
+                    complete: function () {
+    
+                    }
+                });
+            });
+
+        }
+    </script>
+</body>
+
+</html>
