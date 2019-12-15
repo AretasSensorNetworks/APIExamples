@@ -66,7 +66,7 @@ while True:
     print("%s" % locationDatum)
 ````
 Sample output:
-````JSON
+````json
 {'tagId': 5116632, 'timestamp': 1576382077291, 'x': 8.302858543667623, 'y': 15.793891240347047, 'z': 2.0, 'blinkRateInterval': 211}
 {'tagId': 5102545, 'timestamp': 1576382077403, 'x': 4.560454596386625, 'y': 16.679619082546353, 'z': 2.0, 'blinkRateInterval': 395}
 {'tagId': 5102078, 'timestamp': 1576382077462, 'x': 7.102846035814868, 'y': 5.716295307070267, 'z': 2.0, 'blinkRateInterval': 200}
