@@ -34,6 +34,7 @@ e.g.:
 
 ## Middleware Configuration
 To configure the AretasNanotronBridge middleware to enable ZMQ output (which will disable all other outputs) set the API mode to 3 in the .properties file of AretasNanotronBridge
+
 `aretas.api.updatemode = 3`
 
 Follow the Aretas Nanotron Middleware Guide for further configuration / optimization steps:
