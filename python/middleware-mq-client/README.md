@@ -12,7 +12,7 @@ ZeroMQ is a hyper efficient networking library / concurrency framwework that mak
 
 ZeroMQ has many platform implementations for C, C++, Java, Python, C#, Perl, NodeJS and more.
 
-You can configure any TCP endpoints for the middleware in the AretasNanotronBridge config. The default endpoints launched in the middleware include:
+You can configure the TCP endpoints for the middleware in the AretasNanotronBridge config (.properties file). The default endpoints launched in the middleware include:
 
 ### Location Data Endpoint
 Typically found at tcp://*:8111
