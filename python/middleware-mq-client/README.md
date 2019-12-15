@@ -51,6 +51,7 @@ import json
 
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
+# just change the endpoint to receive sensordata messages instead
 socket.connect("tcp://localhost:8111")
 socket.subscribe("")
 while True:
