@@ -1,8 +1,11 @@
 # Aretas Nanotron Middleware MQ Client
+
 The Aretas Nanotron Middleware allows you to connect to a nanoLES instance and get conditioned location data from the nanoLES instance. You can use the middleware in different ways:
 1. REST API Update mode (Batch or Serial) for Edge or Cloud based applications - you can use the Aretas IoT Stack or implement your own endpoints
 2. CSV Datalogging output - highspeed / flush on write or std write options for CSV logging
 3. ZeroMQ Socket Mode - You can benefit from the various filters in the middleware and a slightly more lean connectivity protocol using zeromq implementation.
+
+** Note that the ZeroMQ Socket Mode is only available in AretasNanotronBridge-0.1.9 or greater.
 
 ## ZMQ Info
 ZeroMQ is a hyper efficient networking library / concurrency framwework that makes network connectivity and messaging a breeze. ZeroMQ easily scales beyond 10K msg/sec and has been tested in many implementations to *millions* of messages per second. If you haven't used or heard of ZeroMQ before check out the ZeroMQ web page: http://zguide.zeromq.org/
