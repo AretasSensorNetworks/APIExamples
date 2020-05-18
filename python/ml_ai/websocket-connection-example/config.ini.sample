@@ -1,0 +1,11 @@
+[DEFAULT]
+API_URL = https://iot.aretas.ca/rest/
+
+API_USERNAME = username
+API_PASSWORD = password
+
+; the location entity uuid is a string value from your Aretas account
+TARGET_LOCATION_ID = uuidstr
+
+; the macs can be one or a comma delimited list belonging to that location id
+TARGET_MACS = 12345678901
