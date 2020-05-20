@@ -91,15 +91,21 @@ else:
             sensorData = np.array(df['data'])
             sensorDataN = sensorData.reshape(len(sensorData), 1)
 
+            # kernel_selection = ['gaussian', 'tophat', 'epanechnikov', 'exponential', 'linear', 'cosine']
+            kernel_selection = ['gaussian', 'tophat', 'epanechnikov']
+
             # very basic estimate for best bandwidth selection
-            grid = GridSearchCV(KernelDensity(), {'bandwidth':np.linspace(.1, 10.0, 40)}, cv=5)
+            grid = GridSearchCV(KernelDensity(), {'bandwidth': np.geomspace(0.1, 100, 20),
+                                                  'kernel': kernel_selection}, cv=5)
             grid.fit(sensorDataN)
             bw = grid.best_params_
 
-            # print(bw['bandwidth'])
+            print(bw)
 
-            model = KernelDensity(bandwidth=bw['bandwidth'], kernel='gaussian')
+            model = KernelDensity(bandwidth=bw['bandwidth'], kernel=bw['kernel'])
             model.fit(sensorDataN)
+
+            print(model)
 
             sensorDataMin = min(sensorDataN)
             sensorDataMax = max(sensorDataN)
