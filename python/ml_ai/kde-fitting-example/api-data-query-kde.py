@@ -94,11 +94,34 @@ else:
             # kernel_selection = ['gaussian', 'tophat', 'epanechnikov', 'exponential', 'linear', 'cosine']
             kernel_selection = ['gaussian', 'tophat', 'epanechnikov']
 
+            kernel_bandwidth_space = np.geomspace(0.1, 100, 10)
+
+            print("First kernel_bandwidth_space:{}".format(kernel_bandwidth_space))
+
             # very basic estimate for best bandwidth selection
-            grid = GridSearchCV(KernelDensity(), {'bandwidth': np.geomspace(0.1, 100, 20),
+            grid = GridSearchCV(KernelDensity(), {'bandwidth': kernel_bandwidth_space,
                                                   'kernel': kernel_selection}, cv=5)
             grid.fit(sensorDataN)
             bw = grid.best_params_
+
+            # get the best bandwidth and run one more tuning step
+            index = None
+            for i in range(len(kernel_bandwidth_space)):
+                if kernel_bandwidth_space[i] == bw['bandwidth']:
+                    index = i
+
+            start = index - 1
+            end = index + 1
+
+            if start < 0:
+                start = 0
+
+            if end > (len(kernel_bandwidth_space) - 1):
+                end = len(kernel_bandwidth_space) - 1
+
+            kernel_bandwidth_space = np.geomspace(kernel_bandwidth_space[start], kernel_bandwidth_space[end], 10)
+
+            print("Second kernel_bandwidth_space:{}".format(kernel_bandwidth_space))
 
             print(bw)
 
