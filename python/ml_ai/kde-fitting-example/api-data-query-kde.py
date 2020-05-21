@@ -5,10 +5,9 @@ from datetime import datetime
 from matplotlib import pyplot
 import plotly.graph_objs as go
 import numpy as np
-from sklearn.neighbors import KernelDensity
-from sklearn.model_selection import GridSearchCV
 import pandas as pd
 import configparser
+import kde_model_utils as kmu
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -30,6 +29,10 @@ def gettoken():
         return None
 
 
+def now_ms():
+    return int(time.time() * 1000)
+
+
 # get an authorization token from the API
 API_TOKEN = gettoken()
 
@@ -47,8 +50,10 @@ else:
     url = API_URL + "sensordata/byrange"
     # now
     end = int(round(time.time() * 1000))
-    # 8 hours of data
+    # 7 days of data
     start = end - (7 * 24 * 60 * 60 * 1000)
+
+    startMs = now_ms()
 
     # this is the "device" we're querying
     mac: int = config['DEFAULT']['TARGET_MAC']
@@ -91,44 +96,7 @@ else:
             sensorData = np.array(df['data'])
             sensorDataN = sensorData.reshape(len(sensorData), 1)
 
-            # kernel_selection = ['gaussian', 'tophat', 'epanechnikov', 'exponential', 'linear', 'cosine']
-            kernel_selection = ['gaussian', 'tophat', 'epanechnikov']
-
-            kernel_bandwidth_space = np.geomspace(0.1, 100, 10)
-
-            print("First kernel_bandwidth_space:{}".format(kernel_bandwidth_space))
-
-            # very basic estimate for best bandwidth selection
-            grid = GridSearchCV(KernelDensity(), {'bandwidth': kernel_bandwidth_space,
-                                                  'kernel': kernel_selection}, cv=5)
-            grid.fit(sensorDataN)
-            bw = grid.best_params_
-
-            # get the best bandwidth and run one more tuning step
-            index = None
-            for i in range(len(kernel_bandwidth_space)):
-                if kernel_bandwidth_space[i] == bw['bandwidth']:
-                    index = i
-
-            start = index - 1
-            end = index + 1
-
-            if start < 0:
-                start = 0
-
-            if end > (len(kernel_bandwidth_space) - 1):
-                end = len(kernel_bandwidth_space) - 1
-
-            kernel_bandwidth_space = np.geomspace(kernel_bandwidth_space[start], kernel_bandwidth_space[end], 10)
-
-            print("Second kernel_bandwidth_space:{}".format(kernel_bandwidth_space))
-
-            print(bw)
-
-            model = KernelDensity(bandwidth=bw['bandwidth'], kernel=bw['kernel'])
-            model.fit(sensorDataN)
-
-            print(model)
+            model = kmu.kde_model_selection(sensorDataN)
 
             sensorDataMin = min(sensorDataN)
             sensorDataMax = max(sensorDataN)
@@ -136,6 +104,9 @@ else:
             # create an array of ints in the range of the samples
             values = np.asarray([value for value in range(int(sensorDataMin - ((sensorDataMax - sensorDataMin) / 2)),
                                                           int(sensorDataMax + ((sensorDataMax - sensorDataMin) / 2)))])
+
+            print(values)
+
             values = values.reshape(len(values), 1)
 
             # get the probabilities to chart against the histogram
