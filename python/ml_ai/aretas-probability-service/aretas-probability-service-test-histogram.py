@@ -2,6 +2,7 @@ import requests
 import time
 import json
 import configparser
+from matplotlib import pyplot
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -54,12 +55,52 @@ else:
     queryUrl = url + "?type=248&startTime=" + str(start) + "&endTime=" + str(end) + "&nBins=100" + strMacs + "&recordLimit=1000000"
 
     print(queryUrl)
+    startTime = now_ms()
 
     response = requests.get(queryUrl, headers={"Authorization": "Bearer " + API_TOKEN, "X-AIR-Token": str(mac)})
 
+    endTime = now_ms()
+
+    print("Time taken for query and data: {0} ms".format(endTime - startTime))
+
     if response.status_code == 200:
+
         json_response = json.loads(response.content.decode())
         print(json_response)
+
+        densities = [x['density'] for x in json_response['frequencyBins']]
+        probabilities = [x['probability'] for x in json_response['frequencyBins']]
+        binLabels = ['{0:.2f}'.format(x['min']) + "-" + '{0:.2f}'.format(x['max']) for x in json_response['frequencyBins']]
+        count = sum([x['count'] for x in json_response['frequencyBins']])
+
+        print("Number of data points:{0}".format(count))
+
+        fig, axes = pyplot.subplots(2, 1)
+
+        from matplotlib.ticker import LinearLocator
+        axes[0].plot(densities)
+        axes[0].set_title("Histogram")
+        axes[0].set_ylabel("Densities")
+        axes[0].set_xlabel("Bin")
+        axes[0].set_xticks(range(0, len(binLabels)))
+        axes[0].set_xticklabels(binLabels, rotation=90)
+        axes[0].get_xaxis().set_major_locator(LinearLocator(numticks=20))
+
+        axes[1].set_title("Histogram")
+        axes[1].plot(probabilities)
+        axes[1].set_ylabel("Probabilities")
+        axes[1].set_xlabel("Bin")
+        axes[1].set_xticks(range(0, len(binLabels)))
+        axes[1].set_xticklabels(binLabels, rotation=90)
+        axes[1].get_xaxis().set_major_locator(LinearLocator(numticks=20))
+
+        fig.tight_layout()
+
+        fileName = '{}.png'.format(startTime)
+
+        pyplot.savefig(fileName)
+
+        pyplot.show()
 
     else:
         print("Invalid response code:")
