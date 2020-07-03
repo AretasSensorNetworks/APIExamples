@@ -94,6 +94,9 @@ else:
 
             # df['data']
             sensorData = np.array(df['data'])
+
+            print("Running KDE on {} samples".format(sensorData.size))
+
             sensorDataN = sensorData.reshape(len(sensorData), 1)
 
             model = kmu.kde_model_selection(sensorDataN)
