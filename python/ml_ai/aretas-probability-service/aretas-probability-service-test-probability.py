@@ -39,19 +39,25 @@ else:
     # now
     end = int(round(time.time() * 1000))
     # 7 days of data
-    start = end - (7 * 24 * 60 * 60 * 1000)
+    start = end - (60 * 24 * 60 * 60 * 1000)
 
     # this is the "device" we're querying
     macs = config['DEFAULT']['TARGET_MACS']
 
     macsToK = [int(x.strip()) for x in macs.split(",")]
 
-    strMacs = ""
+    query_macs = ""
     for mac in macsToK:
-        strMacs = strMacs + "&macs=" + str(mac)
+        query_macs = query_macs + "&macs=" + str(mac)
 
-    # profile some humidity sensors and get the density of X
-    queryUrl = url + "?type=248&startTime=" + str(start) + "&endTime=" + str(end) + "&nBins=100" + strMacs + "&recordLimit=1000000&X=45"
+    test_values = [-100.0, 41, 55, 62, 1000, 44.0034]
+
+    query_test_values = ""
+    for X in test_values:
+        query_test_values = query_test_values + "&X={0}".format(X)
+
+    # profile some humidity sensors and get the density of some values of X
+    queryUrl = url + "?type=248&startTime=" + str(start) + "&endTime=" + str(end) + "&nBins=100" + query_macs + "&recordLimit=1000000" + query_test_values
 
     print(queryUrl)
 

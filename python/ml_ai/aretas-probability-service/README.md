@@ -21,17 +21,17 @@ The univariate API endpoint allows you to:
 
 Calling the endpoint in Python is very simple, just construct a URL with the following parameters:
 
-macs (a list of entity IDs to query)
+**macs** (a list of entity IDs to query)
 
-startTime (the start time for the profiling)
+**startTime** (the start time for the profiling)
 
-endTime (the end time for the profiling)
+**endTime** (the end time for the profiling)
 
 type (the entity type. e.g. 181 for CO2, 248 for RH, etc)
 
-recordLimit (set this very high - it determines the maximum number of records to fetch from the time series data store)
+**recordLimit** (set this very high - it determines the maximum number of records to fetch from the time series data store)
 
-Example:
+Example (querying for a Histogram):
 
 http://localhost:8080/rest/probability/univariatehistogram?type=248&startTime=1593210799254&endTime=1593815599254&nBins=100&macs=33333333&macs=222222222&macs=11111111&recordLimit=1000000
 

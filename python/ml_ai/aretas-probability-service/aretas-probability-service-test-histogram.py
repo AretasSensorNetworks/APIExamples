@@ -40,9 +40,9 @@ else:
     # now
     end = int(round(time.time() * 1000))
     # 7 days of data
-    start = end - (7 * 24 * 60 * 60 * 1000)
+    start = end - (30 * 24 * 60 * 60 * 1000)
 
-    # this is the "device" we're querying
+    # the "devices" we're profiling
     macs = config['DEFAULT']['TARGET_MACS']
 
     macsToK = [int(x.strip()) for x in macs.split(",")]
