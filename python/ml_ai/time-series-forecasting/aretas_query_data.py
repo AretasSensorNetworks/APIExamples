@@ -46,11 +46,11 @@ def get_data():
         url = API_URL + "sensordata/byrange"
         # now
         end = now_ms()
-        # 7 days of data
-        start = end - (7 * 24 * 60 * 60 * 1000)
+        # N days of data
+        start = end - (20 * 24 * 60 * 60 * 1000)
 
         response = requests.get(url + "?mac=" + str(TARGET_MAC) + "&begin=" + str(start) + "&end=" + str(end) +
-                                "&limit=10000000&type=246&downsample=false&movingAverage=true&windowSize=5",
+                                "&limit=10000000&type=246&downsample=false&movingAverage=false&windowSize=5",
                                 headers={"Authorization": "Bearer " + API_TOKEN, "X-AIR-Token": str(TARGET_MAC)})
 
         if response.status_code == 200:
