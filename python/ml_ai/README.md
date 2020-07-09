@@ -6,10 +6,11 @@ will cover ML/AI APIs from the Aretas API as well as other popular frameworks (i
 
 We'll focus mostly on **realtime** AI, but also other analytical and forecasting methods. The main topics will be:
 
-1. ####Anomaly Detection
-2. ####Time Series Forecasting
-3. ####Probabilistic Methods
+1. #### Anomaly Detection
+2. #### Time Series Forecasting
+3. #### Probabilistic Methods
 4. #### Event Detection and Classification
 5. #### Sensor Data Classifiers
 6. #### Recommender Systems
 7. #### Location Data Specific Filters and Methods
+
