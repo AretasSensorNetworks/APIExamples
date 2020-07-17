@@ -1,0 +1,12 @@
+[DEFAULT]
+API_URL = https://iot.aretas.ca/rest/
+API_LOCATION_EVENTS_URL = wss://iot.aretas.ca/locationevents/
+
+API_USERNAME = username
+API_PASSWORD = password
+
+; the building map entity uuid is a string value from your Aretas account
+TARGET_MAP_ID =
+
+; the macs can be one or a comma delimited list belonging to that location id
+TARGET_TAG_IDS = 123456,123456
