@@ -6,7 +6,7 @@ def main():
 
     end = ldq.now_ms()
     start = end - (8 * 60 * 60 * 1000)
-    tag_id = 51020
+    tag_id = 20001
 
     # apply a moving average window to each axis then sum the each averaged axis back into one point
     moving_average = False

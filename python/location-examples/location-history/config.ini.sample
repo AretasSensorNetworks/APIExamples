@@ -1,5 +1,7 @@
-[DEFAULT]
 API_URL = https://iot.aretas.ca/rest/
 
 API_USERNAME = username
 API_PASSWORD = password
+
+; the location entity uuid is a string value from your Aretas account
+TARGET_LOCATION_ID =
