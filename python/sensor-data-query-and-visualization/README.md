@@ -14,6 +14,21 @@ The supplied Python example demonstrates:
  4. How to chart the resulting data
  5. How to use moving average windows and data decimation
 
+### config.ini
+
+Copy config.ini.sample to config.ini 
+
+Your file will need the following lines:
+
+    [DEFAULT]
+    API_URL = https://iot.aretas.ca/rest/
+    
+    API_USERNAME = username
+    API_PASSWORD = password
+    
+    TARGET_MAC =
+    TARGET_TYPE =
+
 ### Required Python modules:
 To run the api-data-query example, you need to install:
 
@@ -38,12 +53,10 @@ Example to acquire a token:
     # get an authorization token from the API
     API_TOKEN = gettoken()
 #### Querying Data
-Querying data can be done a number of ways and the data query endpoints contain many options (decimation, moving average, smoothing, outlier filtering, indexes, etc). To get started with a basic data query though, use the following example (note the access token header):
+Querying data can be done a number of ways and the data query endpoints contain many options (decimation, moving average, smoothing, outlier filtering, indexes, etc). To get started with a basic data query is pretty easy:
     
     import sensor_data_query as sdq
     sdq.query_sensor_data_basic(mac, None, start, end, 1000000)
-    
-
     
 ### Running the code
 Make sure you:
