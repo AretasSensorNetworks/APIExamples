@@ -1,6 +1,10 @@
-
+*.ini
 .vscode/*
 **/.vscode/*
 .idea/*
 .idea/vcs.xml
 **/__pycache__/*
+python/**/*.html
+python/**/*.ini
+python/**/.idea/
+python/**/*__pycache__/
