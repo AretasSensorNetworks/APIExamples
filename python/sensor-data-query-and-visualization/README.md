@@ -65,5 +65,17 @@ The magic of Plotly will produce a nice HTML report page containing the chart fo
 The second example (sensor-data-vis-example-mv.py) contains a comparison of a few moving average window sizes and a decimation / downsampling
  (with feature preservation)
  
+    # no moving average (raw data)
+    sdq.query_sensor_data_basic(mac, target_type, start, end, 1000000)
+    
+    # moving average window of 10
+    sdq.query_sensor_data_basic(mac, target_type, start, end, 10000000, False, None, True, 10)
+    
+    # moving average window of 100
+    sdq.query_sensor_data_basic(mac, target_type, start, end, 10000000, False, None, True, 100)
+
+    # downsamples the chart to 100 points max
+    sdq.query_sensor_data_basic(mac, target_type, start, end, 10000000, False, None, False, None, False, downsample=True, downsample_size=100)
+ 
  The last chart line (light purple) is the downsampled version
  ![Moving Average / Decimation](http://www2.aretas.ca/wp-content/uploads/2020/07/moving-average-decimation-comparison.jpg) 
