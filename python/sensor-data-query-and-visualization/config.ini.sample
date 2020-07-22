@@ -1,5 +1,8 @@
+[DEFAULT]
 API_URL = https://iot.aretas.ca/rest/
 
 API_USERNAME = username
 API_PASSWORD = password
 
+TARGET_MAC =
+TARGET_TYPE =

@@ -13,7 +13,7 @@ def main():
     mac = config['DEFAULT']['TARGET_MAC']
     # target_type = config['DEFAULT']['TARGET_TYPE']
 
-    # get the current time in linux epoch ms
+    # get the current time in linux epoch ms from the convenience function
     end = sdq.now_ms()
 
     # set the start time for the query 7 days ago (again in linux epoch ms)

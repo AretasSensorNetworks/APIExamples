@@ -59,3 +59,11 @@ From the command prompt, just type:
 ### Results
 The magic of Plotly will produce a nice HTML report page containing the chart for the query interval:
 ![Chart results](https://www2.aretas.ca/wp-content/uploads/2019/11/python-api-data-query-output.jpg)
+
+#### Moving Average / Decimation Comparison
+
+The second example (sensor-data-vis-example-mv.py) contains a comparison of a few moving average window sizes and a decimation / downsampling
+ (with feature preservation)
+ 
+ The last chart line (light purple) is the downsampled version
+ ![Moving Average / Decimation](http://www2.aretas.ca/wp-content/uploads/2020/07/moving-average-decimation-comparison.jpg) 
