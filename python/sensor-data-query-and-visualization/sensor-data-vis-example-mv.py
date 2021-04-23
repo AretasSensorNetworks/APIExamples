@@ -28,6 +28,19 @@ def main():
     # downsamples the chart to 100 points max
     to_chart.append(sdq.query_sensor_data_basic(mac, target_type, start, end, 10000000, False, None, False, None, False, downsample=True, downsample_size=100))
 
+    # time based moving average
+    # hourly
+    time_window = 60 * 60 * 1000
+    to_chart.append(sdq.query_sensor_data_basic(mac, target_type, start, end, 10000000, False, None,
+                                                moving_average=True, mv_window_size=time_window, moving_average_type=1))
+
+    # time based moving average
+    # daily
+    start = end - (30 * 24 * 60 * 60 * 1000)
+    time_window = 24 * 60 * 60 * 1000
+    to_chart.append(sdq.query_sensor_data_basic(mac, target_type, start, end, 10000000, False, None,
+                                                moving_average=True, mv_window_size=time_window, moving_average_type=1))
+
     chart_data = []
 
     for data_set in to_chart:

@@ -117,6 +117,7 @@ def query_sensor_data_basic(mac=None,
                             iqr_multi=10.0,
                             moving_average=False,
                             mv_window_size=1,
+                            moving_average_type=0,
                             offset_data=False,
                             downsample=False,
                             downsample_size=100):
@@ -144,6 +145,8 @@ def query_sensor_data_basic(mac=None,
         if you set this to True, you should also set the mv_window_size
     mv_window_size: float, optional
         The window size for the moving average filter (defaults to 1)
+    moving_average_type: int, optional
+        The moving average type (e.g. basic window or time based)
     offset_data: bool, optional
         If set to True, the query will be offset from the time the entity last reported
         (rather than the specified date). For example, if the sensor reported 8 hours ago, the start time
@@ -188,7 +191,7 @@ def query_sensor_data_basic(mac=None,
 
         if moving_average is not False and mv_window_size is not None:
             query_uri += "&movingAverage=" + str_mv_bool + \
-                    "&windowSize=" + str(mv_window_size)
+                    "&windowSize=" + str(mv_window_size) + "&movingAverageType=" + str(moving_average_type)
 
         if iqr_filter is not False and iqr_multi is not None:
             query_uri += "&iqrFilter=" + str_iqr_bool + \
@@ -201,7 +204,7 @@ def query_sensor_data_basic(mac=None,
         if type_target is not None:
             query_uri += "&type=" + str(type_target)
 
-        # print(query_uri)
+        print(query_uri)
 
         response = requests.get(url + query_uri,
                                 headers={"Authorization": "Bearer " + API_TOKEN, "X-AIR-Token": str(mac)})

@@ -17,7 +17,7 @@ def main():
     end = sdq.now_ms()
 
     # set the start time for the query 7 days ago (again in linux epoch ms)
-    start = end - (7 * 24 * 60 * 60 * 1000)
+    start = end -(7 * 24 * 60 * 60 * 1000)
 
     # you can also just pass in your own MAC, target_type etc and not use the config.ini
     type_map = sdq.query_sensor_data_basic(mac, None, start, end, 1000000)

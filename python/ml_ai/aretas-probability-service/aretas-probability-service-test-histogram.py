@@ -51,8 +51,8 @@ else:
     for mac in macsToK:
         strMacs = strMacs + "&macs=" + str(mac)
 
-    # get the histogram for some humidity sensors (type 248) with 100 bins
-    queryUrl = url + "?type=248&startTime=" + str(start) + "&endTime=" + str(end) + "&nBins=100" + strMacs + "&recordLimit=1000000"
+    # get the histogram for some temperature sensors (type 246) with 100 bins
+    queryUrl = url + "?type=246&startTime=" + str(start) + "&endTime=" + str(end) + "&nBins=100" + strMacs + "&recordLimit=1000000"
 
     print(queryUrl)
     startTime = now_ms()
@@ -68,10 +68,16 @@ else:
         json_response = json.loads(response.content.decode())
         print(json_response)
 
+        json_response['frequencyBins'].sort(key=lambda x: x['density'])
+
         densities = [x['density'] for x in json_response['frequencyBins']]
         probabilities = [x['probability'] for x in json_response['frequencyBins']]
+
         binLabels = ['{0:.2f}'.format(x['min']) + "-" + '{0:.2f}'.format(x['max']) for x in json_response['frequencyBins']]
         count = sum([x['count'] for x in json_response['frequencyBins']])
+
+        # probabilities.sort()
+        # densities.sort()
 
         print("Number of data points:{0}".format(count))
 
