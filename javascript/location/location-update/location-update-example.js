@@ -2,14 +2,14 @@
 var querystring = require('querystring');
 
 const authOptions = {
-    username: "jufesta",
-    password: "FooBaZ",
+    username: "",
+    password: "",
 };
 
 const globalOptions = {
     host: "10.0.0.8",
     port: 8080
-}
+};
 
 //use https in live environments
 const httpObj = require('http'); 
@@ -108,8 +108,6 @@ function updateAPI(accessToken){
     req.end();
 
 }
-
-//setInterval(updateAPI, 5000);
 
 async function doMain(){
 
