@@ -1,8 +1,3 @@
-<<<<<<< Updated upstream
-# Aretas API Client Module
-
-This is the initial commit (not yet functional) of the upcoming python module for accessing most of the functionality of the Aretas API
-=======
 # Aretas API Client Libary
 
 This is a (currently) barebones framework for intereacting with the Aretas REST API in python
@@ -47,4 +42,3 @@ Basic instantiation and usage of the API:
 
     for obj in my_devices_and_locations:
         print(obj)
->>>>>>> Stashed changes
