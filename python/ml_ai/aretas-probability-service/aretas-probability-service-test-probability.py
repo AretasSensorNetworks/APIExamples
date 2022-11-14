@@ -35,11 +35,11 @@ if API_TOKEN is None:
     exit()
 else:
 
-    url = API_URL + "probability/univariatehistodensity"
+    url = API_URL + "probability/univariatehistoprobability"
     # now
     end = int(round(time.time() * 1000))
-    # 7 days of data
-    start = end - (60 * 24 * 60 * 60 * 1000)
+    # 2 days of data
+    start = end - (30 * 24 * 60 * 60 * 1000)
 
     # this is the "device" we're querying
     macs = config['DEFAULT']['TARGET_MACS']
@@ -50,7 +50,7 @@ else:
     for mac in macsToK:
         query_macs = query_macs + "&macs=" + str(mac)
 
-    test_values = [-100.0, 41, 55, 62, 1000, 44.0034]
+    test_values = [-100.0, 1, 32, 35, 1000, 44.0034]
 
     query_test_values = ""
     for X in test_values:

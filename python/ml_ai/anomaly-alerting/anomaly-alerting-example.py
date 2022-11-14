@@ -34,7 +34,9 @@ def check_probability(datum):
 
     # pick a "width" for the integral
     # which is essentially a bin width...
-    pwidth = 2
+    # this is the "sensitivity" - the probabilities will become increasingly smaller
+    # as the bin width shrinks
+    pwidth = 10
     targetX = datum['data']
     pmin = math.floor(targetX - pwidth / 2)
     pmax = math.ceil(targetX + pwidth / 2)
@@ -111,6 +113,7 @@ else:
     start = end - (7 * 24 * 60 * 60 * 1000)
 
     # this is the "device" we're querying
+    # 181 is CO2 sensor type
     mac: int = config['DEFAULT']['TARGET_MAC']
     response = requests.get(url + "?mac=" + str(mac) + "&begin=" + str(start) + "&end=" + str(
         end) + "&limit=10000000&downsample=false&movingAverage=true&windowSize=5&type=181",

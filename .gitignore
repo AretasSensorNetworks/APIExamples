@@ -8,4 +8,4 @@ python/**/*.html
 python/**/*.ini
 python/**/.idea/
 python/**/*__pycache__/
-python/tests/*
+python/examples/*

@@ -1,3 +1,4 @@
+import numpy
 import requests
 import time
 import json
@@ -27,6 +28,14 @@ def gettoken():
 def now_ms():
     return int(time.time() * 1000)
 
+
+def get_probability(histo, X):
+    # get the probability of X occurring within this distribution
+    for b in histo['frequencyBins']:
+        if X > b['min'] and X <= b['max']:
+            return b['probability']
+
+    return 0
 
 # get an authorization token from the API
 API_TOKEN = gettoken()
@@ -65,21 +74,24 @@ else:
 
     if response.status_code == 200:
 
-        json_response = json.loads(response.content.decode())
-        print(json_response)
+        histogram = json.loads(response.content.decode())
+        print(histogram)
 
-        json_response['frequencyBins'].sort(key=lambda x: x['density'])
+        histogram['frequencyBins'].sort(key=lambda x: x['density'])
 
-        densities = [x['density'] for x in json_response['frequencyBins']]
-        probabilities = [x['probability'] for x in json_response['frequencyBins']]
+        densities = [x['density'] for x in histogram['frequencyBins']]
+        probabilities = [x['probability'] for x in histogram['frequencyBins']]
 
-        binLabels = ['{0:.2f}'.format(x['min']) + "-" + '{0:.2f}'.format(x['max']) for x in json_response['frequencyBins']]
-        count = sum([x['count'] for x in json_response['frequencyBins']])
+        binLabels = ['{0:.2f}'.format(x['min']) + "-" + '{0:.2f}'.format(x['max']) for x in histogram['frequencyBins']]
+        count = sum([x['count'] for x in histogram['frequencyBins']])
 
         # probabilities.sort()
         # densities.sort()
 
-        print("Number of data points:{0}".format(count))
+        print("Number of observations:{0}".format(count))
+        print("5th percentile:{0}".format(numpy.percentile(probabilities, 5.0)))
+        print("90th percentile:{0}".format(numpy.percentile(probabilities, 90.0)))
+        print("Probability of {0} is: {1}".format(20.0, get_probability(histogram, 20.0)))
 
         fig, axes = pyplot.subplots(2, 1)
 
