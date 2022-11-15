@@ -1,5 +1,5 @@
 import requests
-from api_config import APIConfig
+from .api_config import APIConfig
 
 
 class APIAuth:
