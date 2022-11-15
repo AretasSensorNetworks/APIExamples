@@ -9,8 +9,20 @@ There will be several examples here for testing the Probability / Anomaly detect
 5) Setting up an anomaly monitor
 6) Subscribing to the anomaly service websocket
 
+The two examples so far:
 
+### aretas-probability-service-test-histogram
 
+This example connects to the API and profiles a group of sensors to determine the probability distribution of
+the sensor data. A Histogram is returned from the API that can be used to determine the probability of a new sensor reading.
+In this way, we can perform anomaly detection based on the quantile of the returned probability.
+
+### aretas-probability-service-test-probability
+
+This example demonstrates how we can send a list of X values (sensor data readings) to the API and get back
+a similarly dimensioned array of probabilities for the X values. 
+
+Further:
 ## Univariate
 
 The univariate API endpoint allows you to:
@@ -31,13 +43,4 @@ type (the entity type. e.g. 181 for CO2, 248 for RH, etc)
 
 **recordLimit** (set this very high - it determines the maximum number of records to fetch from the time series data store)
 
-Example (querying for a Histogram):
-
-http://localhost:8080/rest/probability/univariatehistogram?type=248&startTime=1593210799254&endTime=1593815599254&nBins=100&macs=33333333&macs=222222222&macs=11111111&recordLimit=1000000
-
-Using the sample code (aretas-probability-service-test-histogram.py) will produce output similar to the following:
-
-![](https://www2.aretas.ca/wp-content/uploads/2020/07/1593816805711.png)
-
-More coming soon...
 
