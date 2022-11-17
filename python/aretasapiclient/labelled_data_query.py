@@ -76,7 +76,7 @@ class LabelledDataQuery:
 
         req = PreparedRequest()
         req.prepare_url(base_url, params)
-        print(req.url)
+        # print(req.url)
 
         response = requests.get(req.url, headers=headers)
 
