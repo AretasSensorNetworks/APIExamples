@@ -27,7 +27,7 @@ TARGET_MACS = config['DEFAULT']['TARGET_MACS']
 
 
 # websocket-connection-example callback
-def on_message(ws, message):
+def on_message(ws_, message):
     # print(message)
     data = json.loads(message)
     # print(type(data))
@@ -48,12 +48,13 @@ def on_close(ws):
 
 
 def on_open(ws):
-    # the aretas sensordataevents websocket-connection-example requires the first message to be the location entity ID and the list of
-    # entity (device) IDs you want to monitor
-    # send the request for the location ID and associated entity addresses
-    req_str = "{},{}".format(TARGET_LOCATION_ID, TARGET_MACS)
+    """the aretas sensordataevents websocket-connection-example requires the first message
+    to be the location entity ID and the list of entity (device) IDs you want to monitor
+    send the request for the location ID and associated entity addresses"""
+    req_str = "{0},{1}".format(TARGET_LOCATION_ID, TARGET_MACS)
     ws.send(req_str)
 
+    """
     # example of threaded run method (for keepalive or what have you)
     # def run(*args):
     #     for i in range(3):
@@ -63,7 +64,7 @@ def on_open(ws):
     #     # ws.close()
     #     print("thread terminating")
     # thread.start_new_thread(run, ())
-
+    """
 
 # basic function to get an access token
 def gettoken():
