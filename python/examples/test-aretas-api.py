@@ -6,7 +6,6 @@ from aretasapiclient.api_config import *
 from aretasapiclient.sensor_data_query import *
 from aretasapiclient.auth import *
 from aretasapiclient.aretas_client import *
-from aretasapiclient.utils import Utils as autils
 from aretasapiclient.api_cache import APICache
 
 

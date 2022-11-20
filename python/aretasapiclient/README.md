@@ -1,12 +1,28 @@
 # Aretas API Client Libary
 
-This is a (currently) barebones framework for intereacting with the Aretas REST API in python
+This is a (currently) "barebones" (compared to all the available endpoints) framework for intereacting with the Aretas REST API in python
 
 All classes in the API take an instantiated APIAuth class
 
 APIAuth needs an APIConfig object
 
 APIConfig has one optional argument (path to a config file)
+
+What's implemented so far:
+
+- High speed cache fetch for latest device readings 
+- Basic analytics queries for historical data
+    - Interpolation
+    - Data decimation
+    - Outlier filtering
+    - Some indexes
+    
+- Fetching client BO view (locations / devices / maps / etc.)
+- Fetching Data Classifiers 
+- Fetching labelled data (from classifiers)
+- Sensor Type metadata mapping
+- Ultra simple sensor data streaming (websockets) - all you do is provide a location and macs to watch and a callback
+- Auth token mgmnt
 
 You must also have at least the following barebones config file:
 

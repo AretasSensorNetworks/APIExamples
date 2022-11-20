@@ -112,7 +112,7 @@ class Utils:
     @staticmethod
     def get_datum_df(data, sensor_type_info: APISensorTypeInfo):
         """
-            Get a structured dataframe for a single "row" of data 
+            Get a structured dataframe for a single "row" of data
             steps:
             1. Get an average timestamp for the timestamp column
             2. reshape the data into a matrix with one row [[col1, col2, col3, ...]]
