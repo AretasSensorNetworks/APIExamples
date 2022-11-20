@@ -42,7 +42,7 @@ class SensorDataWebsocket:
         while True:
             if not self._ws_ping_thread_run:
                 return
-            time.sleep(30)
+            time.sleep(10)
             self.ws.send("PING")
         logging.info("ws_run_ping terminating")
 
@@ -50,13 +50,13 @@ class SensorDataWebsocket:
         # url = self.api_auth.api_config.get_api_url() + "sensordata/byrange"
         # open the websocket and watch for messages
         websocket.enableTrace(self._ws_trace_enable)
+        self._ws_ping_thread_run = True
         self.ws = websocket.WebSocketApp(
             "ws://iot.aretas.ca/sensordataevents/" + self.api_auth.get_token(),
             on_message=self.on_message,
             on_error=self.on_error,
             on_close=self.on_close
         )
-        self._ws_ping_thread_run = True
         self.ws.on_open = self.on_open
         x = threading.Thread(target=self.ws_run, args=())
         x.start()
@@ -72,7 +72,7 @@ class SensorDataWebsocket:
         req_str = "{0},{1}".format(self._target_location_id, mac_str)
         self.ws.send(req_str)
 
-        x = threading.Thread(target=self.ws_ping_thread, args=())
+        x = threading.Thread(target=self.ws_run_ping, args=())
         x.start()
         # in case we ned to access the thread
         self.ws_ping_thread = x
